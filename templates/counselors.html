@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+   <!-- metadate goes in head -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   
+   <title>Counselors</title>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a class="active" href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+<h1>Counselors</h1>
+
+<p>This page will show all the counselors employed by the shelter.</p>
+
+<form id="addcounselor" action="/counselors" method="post">
+    <fieldset>
+    	<legend>Add a Counselor</legend>
+
+        <label for="firstName">First Name:</label>
+        <input name="firstName" id="firstName" type="text">
+
+        <label for="lastName">Last Name:</label>
+        <input name="lastName" id="lastName" type="text">
+
+        <label for="shelterID">Shelter:</label>
+        <select name="shelterID">
+            <!--<option value="">Select Shelter</option> CAN ADD THIS FUNCTION LATER IF ADDING MORE SHELTERS -->
+            {% for s in shelters %}
+            <option value="{{ s[0] }}">{{ s[1] }}</option>
+            {% endfor %}
+        </select>
+        <button>Add</button>
+    </fieldset>
+</form>
+
+<table>
+ <thead>
+  <tr>
+   <th> Counselor ID
+   <th> First Name
+   <th> Last Name
+   <th> Shelter
+   <th> &nbsp;
+ <tbody>
+    {% for r in rows %}
+    <tr>
+        <td> {{ r[0] }}</td>
+        <td> {{ r[1] }}</td>
+        <td> {{ r[2] }}</td>
+        <td> {{ r[3] }}</td>
+        <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_counselor/{{r[0]}}'"> </td>
+        <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_counselor/{{r[0]}}'"> </td>
+      </tr>
+      {% endfor %}
+ </tbody>
+</table>
+
+</body>
+</html>

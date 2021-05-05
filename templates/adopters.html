@@ -1,0 +1,102 @@
+<html>
+    <head><title>Browse Adopters</title></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a class="active" href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a  href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+<h1>Adopters</h1>
+<div id="adopter_form">
+    <h2>Add New Adopter:</h2><br/>
+    <form id="adopter_form" action="/adopters" method="post">
+        <label>First Name:</label>
+        <input type="text" name="fname" id="fname">
+        <br />
+        <label>Last Name:</label>
+        <input type="text" name="lname" id="lname">
+        <br />
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" id="phone">
+        <br />
+        <label>E-mail Address:</label>
+        <input type="email" name="email" id="email">
+        <br />
+        <label>Address:</label><br />
+        <input type="street" name="street" id="street" placeholder="street"> <br />
+        <input type="city" name="city" id="state" placeholder="city">
+        <input type="state" name="state" id="state" placeholder="state">
+        <input type="zip" name="zipcode" id="zipcode" placeholder="zip"> <br />
+
+        <input type="submit" name='submit_button' value="Submit">
+        <br />
+        <input type="search" name="adopterSearch" placeholder="Search for adopter..">
+        <input type ="submit" name="submit_button" value="Search"><br />
+    </form>
+</div>
+<div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>E-mail</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[7] }}</td>
+            <td>{{ r[8] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] }}</td>
+            <td>{{ r[6] }}</td>
+            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_adopter/{{r[0]}}'"> </td>
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_adopter/{{r[0]}}'"> </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</html>

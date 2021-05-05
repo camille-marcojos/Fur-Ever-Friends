@@ -1,0 +1,72 @@
+<html>
+    <head><title>Update Counselor</title></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<!-- NAV BAR -->
+<nav>
+    <div class="logo">
+    </div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a class="active" href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+<h1>Update Adoption Status:</h1>
+
+<form id="update_adoption" action="/update_adoption/{{adoption[0]}},{{adoption[6]}}" method="post">
+<input type="hidden" name="app_num" value="{{ adoption[0] }}">
+<input type="hidden" name="petID" value="{{ adoption[6] }}">
+<table>
+    <thead>
+     <tr>
+      <th> App ID
+      <th> Adopter's First Name
+      <th> Adopter's Last Name
+      <th> Counselor ID
+      <th> Dog's Name
+      <th> Status
+      <th> &nbsp;
+    <tbody>
+     <tr>
+       <td> {{ adoption[0] }}</td>
+       <td> {{ adoption[1] }}</td>
+       <td> {{ adoption[2] }}</td>
+       <td> {{ adoption[3] }}</td>
+       <td> {{ adoption[4] }}</td>
+       <td> <select name="status">
+           <option {% if adoption[5] == 'Pending' %} selected {% endif %}> Pending</option>
+           <option {% if adoption[5] == 'Approved' %} selected {% endif %}> Approved</option>
+           <option {% if adoption[5] == 'Denied' %} selected {% endif %}> Denied</option>
+       </select></td>
+       <td> <input type="submit" value="Submit"> </td>
+     </tr>
+     </tbody>
+   </table>
+    
+</form>
+
+</html>
+

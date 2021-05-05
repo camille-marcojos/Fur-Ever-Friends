@@ -1,0 +1,106 @@
+<html>
+    <head><title>Browse Adopters</title></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a class="active" href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+
+<div id="dogform">
+    <h2>Update Dog:</h2><br />
+    <form id="add_dog" action="/update_dog/{{dog[0]}}" method ="post">
+        <input type="hidden" name="petID" value="{{ dog[0] }}">
+        <label>Dog Name:</label>
+        <input type="text" name="dogname" id="dogname" value = "{{ dog[2] }}">
+        <br/>
+        <label>Birthdate:</label>
+        <input type="date" name="birthday" id="birthday" value = "{{ dog[3] }}">
+        <br />
+        <label>Breed:</label>
+        <input type= "text" name="breed" id="breed" value = "{{ dog[5] }}">
+        </br />
+        <label>Gender:</label>
+        <select id="doggender" name="doggender">
+                <option value="Male" {% if dog[4] == 'Male' %} selected {% endif %}>Male</option>
+                <option value="Female" {% if dog[4] == 'Female' %} selected {% endif %}>Female</option>
+        </select>
+        <label>Size(fullgrown):</label>
+        <select id="dogsize" name ="dogsize">
+            <option value="Small" {% if dog[6] == 'Small' %} selected {% endif %}>Small</option>
+            <option value="Medium" {% if dog[6] == 'Medium' %} selected {% endif %}>Medium</option>
+            <option value="Large" {% if dog[6] == 'Large' %} selected {% endif %}>Large</option>
+        </select>
+        </br />
+        <label>Adoption Satus:</label>
+        <select id="dogstatus" name ="dogstatus">
+            <option value="Available" {% if dog[7] == 'Available' %} selected {% endif %}>Avaialble</option>
+            <option value="Pending" {% if dog[7] == 'Pending' %} selected {% endif %}>Pending</option>
+            <option value="Adopted" {% if dog[7] == 'Adopted' %} selected {% endif %}>Adopted</option>
+        </select>
+        </br />
+        <label>Energy Level:</label>
+        <select id="energy" name="energy">
+            <option value="Low" {% if dog[8] == 'Low' %} selected {% endif %}>Low</option>
+            <option value="Medium" {% if dog[8] == 'Medium' %} selected {% endif %}>Medium</option>
+            <option value="High" {% if dog[8] == 'High' %} selected {% endif %}>High</option>
+        </select>
+        </br />
+        <label>Coat Type:</label>
+        <input type="text" id="coat" name ="coat" value = " {{ dog[9] }}">
+        </br />
+        <label>Color:</label>
+        <input type="text" name="color" id="color" value = " {{ dog[10] }}">
+        </br />
+        <label>Dogs OK?</label>
+        <select id="dogsOK" name="dogsOK" >
+            <option value="Y" {% if dog[11] == 'Y' %} selected {% endif %}>Yes</option>
+            <option value="N" {% if dog[11] == 'N' %} selected {% endif %}>No</option>
+        </select>
+        </br />
+        <label>Kids OK?</label>
+        <select id="kidsOK" name="kidsOK">
+            <option value="Y" {% if dog[13] == 'Y' %} selected {% endif %}>Yes</option>
+            <option value="N" {% if dog[13] == 'N' %} selected {% endif %}>No</option>
+        </select>
+    </br />
+    <label>Cats OK?</label>
+    <select id="catsOK" name="catsOK">
+        <option value="Y" {% if dog[12] == 'Y' %} selected {% endif %}>Yes</option>
+        <option value="N" {% if dog[12] == 'N' %} selected {% endif %}>No</option>
+    </select>
+    <br />
+    <input type="submit">
+</form>
+</div>
+</html>

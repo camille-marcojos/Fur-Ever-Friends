@@ -1,0 +1,133 @@
+<html>
+    <head><title>Browse Dogs</title></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a class="active" href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+
+
+
+<h1>Dogs</h1>
+
+    <button onclick="window.location = '/add_dog'">Add New Dog</button>
+    <form method="POST" action="/dogs">
+        <input type="text" name="dogSearch" placeholder="dog name..">
+        <input type="submit" value="Search">
+        <br />
+        <label>Status:</label>
+        <select name="dogstatus">
+            <option value="any">Any</option>
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Adopted">Adopted</option>
+        </select>
+        <input type="submit" value="Filter">
+    <!--
+    <label>Breed:</label>
+    <select id ="dogbreed">
+        <option value="">Any</option>
+        {% for b in breeds %}
+        <option value="{{ b[0] }}">{{ b[0] }}</option>
+        {% endfor %}
+    </select>
+    <label>Age:</label>
+    <select id="dogage">
+        <option value="any">Any</option>
+        <option value="puppy">Puppy</option>
+        <option value="young">Young</option>
+        <option value="adult">Adult</option>
+        <option value="Senior">Senior</option>
+    </select>
+    <label>Gender:</label>
+    <select id="doggender">
+        <option value="any">Any</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    <label>Size:</label>
+    <select id="dogsize">
+        <option value="any">Any</option>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+    </select>
+-->
+<!--<form method="POST" action="/dogs">-->
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Pet ID</th>
+            <th>Shelter</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+            <th>Breed</th>
+            <th>Size</th>
+            <th>Status</th>
+            <th>Energy Level</th>
+            <th>Coat</th>
+            <th>Color</th>
+            <th>Dogs OK</th>
+            <th>Cats OK</th>
+            <th>Kids OK</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td>{{ r.0 }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] }}</td>
+            <td>{{ r[6] }}</td>
+            <td>{{ r[7] }}</td>
+            <td>{{ r[8] }}</td>
+            <td>{{ r[9] }}</td>
+            <td>{{ r[10] }}</td>
+            <td>{{ r[11] }}</td>
+            <td>{{ r[12] }}</td>
+            <td>{{ r[13] }}</td>
+            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_dog/{{r[0]}}'"> </td>
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_dog/{{r[0]}}'"> </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+</html>

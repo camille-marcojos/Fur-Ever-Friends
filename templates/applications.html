@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+   <!-- metadate goes in head -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   
+   <title>View Applications</title>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a class="active" href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+<h1>Applications</h1>
+<!-- WILL UPDATE SEARCHES AT A LATER TIME <form>
+   <fieldset>
+      <legend>Search for an application by:</legend>
+      <label for="appID">App ID:</label>
+      <input name="appID" id="appID" type="text">
+      <button>Search</button>
+      <br>
+      <br>
+      Adopter Information:<br>
+      <label for="fname">First Name:</label>
+        <input name="fname" id="fname" type="text">
+
+        <label for="lname">Last Name:</label>
+        <input name="lname" id="lname" type="text">
+        <button>Search</button>
+   </fieldset>
+</form> -->
+<br>
+<button onclick="window.location.href = '/add_application';">Add New Application</button>
+<button onclick="window.location.href = '/adoption_details';">Add a Dog to an Application</button><br><br>
+<table>
+ <thead>
+  <tr>
+   <th> App ID
+   <th> Date
+   <th> Shelter
+   <th> Adopter
+   <th> Counselor
+   <th> Dog #1
+   <th> Dog #2
+   <th> Dog #3
+   <th> Meet & Greet?
+   <th> # of Adults
+   <th> # of Children
+   <th> # of Pets
+   <th> Home Type
+   <th> Home Status
+   <th> &nbsp;
+   <th> &nbsp;
+ <tbody>
+    {% for r in rows %}
+  <tr>
+    <td> {{ r[0] }}</td>
+    <td> {{ r[1] }}</td>
+    <td> {{ r[2] }}</td>
+    <td> {{ r[3] }}</td>
+    <td> {{ r[4] }}</td>
+    <td> {{ r[5] }}</td>
+    <td> {{ r[6] }}</td>
+    <td> {{ r[7] }}</td>
+    <td> {{ r[8] }}</td>
+    <td> {{ r[9] }}</td>
+    <td> {{ r[10] }}</td>
+    <td> {{ r[11] }}</td>
+    <td> {{ r[12] }}</td>
+    <td> {{ r[13] }}</td>
+    <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_application/{{r[0]}}'"> </td>
+    <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_application/{{r[0]}}'"> </td> 
+   </tr>
+   {% endfor %}
+</table>
+</body>
+</html>

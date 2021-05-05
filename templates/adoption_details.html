@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+   <!-- metadate goes in head -->
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   
+   <title>Adoption Details</title>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a class="active" href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+<h1>Adoption Details</h1>
+
+<p>This page shows the status of submitted applications. Users can update the application status, and add or delete a pet from an application.</p>
+
+<!-- WILL IMPLEMENT SEARCHES AT A LATER TIME<form>
+  <fieldset>
+     <legend>Search by:</legend>
+     <label for="appID">App ID:</label>
+     <input name="appID" id="appID" type="text">
+     <button>Search</button>
+     <br>
+     <label for="petID">Pet ID:</label>
+     <input name="petID" id="petID" type="text">
+     <button>Search</button>
+     <br>
+     App Status:
+     <select name="search_appStatus">
+     <option>Pending</option>
+     <option>Approved</option>
+     <option>Denied</option>
+     </select>
+     <button>Search</button>
+     <br>
+     <br>
+     Adopter Information:<br>
+     <label for="adopter_fname">First Name:</label>
+       <input name="adopter_fname" id="adopter_fname" type="text">
+       <label for="adopter_lname">Last Name:</label>
+       <input name="adopter_lname" id="adopter_lname" type="text">
+       <button>Search</button>
+    <br>
+    <br>
+     Counselor Information:<br>
+     <label for="counselor_fname">First Name:</label>
+       <input name="counselor_fname" id="counselor_fname" type="text">
+       <label for="counselor_lname">Last Name:</label>
+       <input name="counselor_lname" id="counselor_lname" type="text">
+       <label for="counselorID">ID:</label>
+       <input name="counselorID" id="counselorID" type="text">
+       <button>Search</button>
+  </fieldset>
+</form> -->
+<br>
+
+<form id="addadoptiondetail" action="/adoption_details" method="post">
+    <fieldset>
+      <legend>Add a pet to an application</legend>
+
+        <label for="appID">Application</label>
+        <select name="appID">
+            <option value="">Select Application</option>
+            {% for a in apps %}
+            <option value="{{ a[0] }}">{{ a[2] }} {{ a[3] }}</option>
+            {% endfor %}
+        </select><br> 
+
+        <label for="petID">Pet Name:</label>
+        <select name="petID">
+            <option value="">Select Pet</option>
+            {% for p in pets %}
+            <option value="{{ p[0] }}">{{ p[1] }}</option>
+            {% endfor %}
+        </select><br>
+
+        Status:
+        <select name="appStatus">
+        <option>Pending</option>
+        <option>Approved</option>
+        <option>Denied</option>
+        </select>
+        <button>Add</button>
+    </fieldset>
+</form>
+
+<table>
+ <thead>
+  <tr>
+   <th> App ID
+   <th> Adopter's First Name
+   <th> Adopter's Last Name
+   <th> Counselor ID
+   <th> Dog's Name
+   <th> Status
+   <th> &nbsp;
+ <tbody>
+    {% for r in rows %}
+  <tr>
+    <td> {{ r[0] }}</td>
+    <td> {{ r[1] }}</td>
+    <td> {{ r[2] }}</td>
+    <td> {{ r[3] }}</td>
+    <td> {{ r[4] }}</td>
+    <td> {{ r[5] }}</td>
+    <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_adoption/{{r[0]}},{{r[6]}}'"> </td>
+    <td> <input type='button' name='Update' value='Update Status' onclick="window.location = '/update_adoption/{{r[0]}},{{r[6]}}'"> </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>

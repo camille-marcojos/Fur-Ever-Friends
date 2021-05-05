@@ -1,0 +1,105 @@
+<html>
+    <head><title>Add Dog</title></head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a class="active" href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+
+<div id="dogform">
+    <h2>Add Dog:</h2><br />
+    <form id="add_dog" action="/add_dog" method ="post">
+        <label>Dog Name:</label>
+        <input type="text" name="dogname" id="dogname">
+        <br/>
+        <label>Birthdate:</label>
+        <input type="date" name="birthday" id="birthday">
+        <br />
+        <label>Breed:</label>
+        <input type= "text" name="breed" id="breed">
+        </br />
+        <label>Gender:</label>
+        <select id="doggender" name="doggender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <label>Size(fullgrown):</label>
+        <select id="dogsize" name ="dogsize">
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+        </select>
+        </br />
+        <label>Adoption Satus:</label>
+        <select id="dogstatus" name ="dogstatus">
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Adopted">Adopted</option>
+        </select>
+        </br />
+        <label>Energy Level:</label>
+        <select id="energy" name="energy">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        </br />
+        <label>Coat Type:</label>
+        <input type="text" id="coat" name ="coat">
+        </br />
+        <label>Color:</label>
+        <input type="text" name="color" id="color">
+        </br />
+        <label>Dogs OK?</label>
+        <select id="dogsOK" name="dogsOK" >
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+        </select>
+        </br />
+        <label>Kids OK?</label>
+        <select id="kidsOK" name="kidsOK">
+            <option value="Y">Yes</option>
+            <option value="N">No</option>
+        </select>
+    </br />
+    <label>Cats OK?</label>
+    <select id="catsOK" name="catsOK">
+        <option value="Y">Yes</option>
+        <option value="N">No</option>
+    </select>
+    <br />
+    <input type="submit">
+</form>
+</div>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- metadata goes in head -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<title>Add Application</title>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<nav>
+	<div class="logo">
+	</div>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/adopters">Adopters</a>
+        </li>
+        <li>
+            <a href="/counselors">Counselors</a>
+        </li>
+        <li>
+            <a href="/dogs">Dogs</a>
+        </li>
+        <li>
+            <a href="/add_dog">Add Dog</a>
+        </li>
+        <li>
+            <a href="/applications">Applications</a>
+        </li>
+        <li>
+            <a class="active" href="/add_application">New Application</a>
+        </li>
+        <li>
+            <a href="/adoption_details">Adoption Details</a>
+        </li>
+    </ul>
+</nav>
+<!-- end navbar --> 
+
+<h1>Submit an Application</h1>
+
+<p>This page contains the form to submit an adoption application for a dog.</p>
+
+
+<form id="addapplication" action="/add_application" method="post">
+    <fieldset>
+        <legend>Please fill out the following information:</legend>
+        <label for="date">Date:</label>
+        <input for="date" type="date" name="appDate">
+        <br>
+
+        <label for="adopterID">Adopter:</label>
+        <select name="adopterID">
+            <option value="">Select Adopter</option>
+            {% for a in adopters %}
+            <option value="{{ a[0] }}">{{ a[2] }} {{ a[3] }}</option>
+            {% endfor %}
+        </select> 
+        <input type='button' name='addadopter' value='Add an Adopter' onclick="window.location = '/adopters'">
+        <br> 
+
+        <label for="shelterID">Shelter:</label>
+        <select name="shelterID">
+            <option value="">Select Shelter</option>
+            {% for s in shelters %}
+            <option value="{{ s[0] }}">{{ s[1] }}</option>
+            {% endfor %}
+        </select><br>    
+
+        <label for="counselorID">Counselor:</label>
+        <select name="counselorID">
+            <option value="">Select Counselor</option>
+            {% for c in counselors %}
+            <option value="{{ c[0] }}">{{ c[2] }} {{ c[3] }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="petID1">Pet ID:</label>
+        <select name="petID1">
+            <option value="">Select Dog</option>
+            {% for p in pets %}
+            <option value="{{ p[0] }}">{{ p[2] }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="petID2">Pet ID:</label>
+        <select name="petID2">
+            <option value="">Select Dog</option>
+            {% for p in pets %}
+            <option value="{{ p[0] }}">{{ p[2] }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="petID3">Pet ID:</label>
+        <select name="petID3">
+            <option value="">Select Dog</option>
+            {% for p in pets %}
+            <option value="{{ p[0] }}">{{ p[2] }}</option>
+            {% endfor %}
+        </select><br>
+
+        Meet & Greet:
+        <select name="meetGreet">
+        <option>N/A</option>
+        <option>Required</option>
+        <option>Completed</option>
+        </select>
+    <br>
+    <br>
+    Please describe your living situation:
+    <br>
+    <br>
+    <label for="numAdults">Number of Adults(18 years or older):</label>
+    <input name="numAdults" id="numAdults" type="number">
+    <br>
+    <label for="numChildren">Number of Children:</label>
+    <input name="numChildren" id="numChildren" type="number">
+    <br>
+    <label for="numAnimals">Number of Pets:</label>
+    <input name="numAnimals" id="numAnimals" type="text">
+    <br>
+    <label for="homeType">Home Type:</label>
+    <label>
+        <input type="radio" name="homeType" value="Single-family home" />Single-family home</label>
+    <label>
+        <input type="radio" name="homeType" value="Multi-family home" />Multi-family home</label>
+    <label>
+        <input type="radio" name="homeType" value="Apartment" />Apartment</label>
+    <label>
+        <input type="radio" name="homeType" value="Condo" />Condo</label>
+
+    <label>
+        <input type="radio" name="homeType" value="Duplex" />Duplex</label>
+    <br>
+    <label for="homeStatus">Home Status:</label>
+    <label>
+        <input type="radio" name="homeStatus" value="Homeowner" />Homeowner</label>
+
+    <label>
+        <input type="radio" name="homeStatus" value="Renter" />Renter</label>
+
+    <label>
+        <input type="radio" name="homeStatus" value="Live with Parents" />Live with Parents</label>
+    <br>     
+    </fieldset>
+    <input type="submit">
+</form>
+
+
+
+</body>
+</html>
