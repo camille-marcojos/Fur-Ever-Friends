@@ -1,35 +1,77 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dog Match</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+        rel="stylesheet">
+        <script src="https://kit.fontawesome.com/4c300bbd99.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="index-body">
+    <div class="menu-header">
+        <h1 class="index-title">
+            Fur-Ever Friends
+            <i class="fas fa-paw"></i>
+        </h1>
+        <h3 class="index-subtitle">
+            A Dog Matching Tool and Adoption Tracker
+        </h3>
     </div>
-    <ul class="nav-links">
-        <li>
-            <a class="active" href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
+    <!-- MENU ITEMS -->
+    <div class="menu-items-table">
+
+        <div class="menu-item">
+            <div class="row menu-item-row">
+                <img src="{{url_for('static', filename='assets/adopters-item.png') }}" alt="" class="menu-img">
+            </div>
+            <div class="row menu-item-row">
+                <a href="/adopters" class="menu-button">Adopters</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="row menu-item-row">
+                <img src="{{ url_for('static', filename='assets/counselors-item.png')}}" alt="" class="menu-img">
+            </div>
+            <div class="row menu-item-row">
+                <a href="/counselors" class="menu-button">Counselors</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="row menu-item-row">
+                <img src="{{ url_for('static', filename='assets/dogs-menu-item.png') }}" alt="" class="menu-img">
+            </div>
+            <div class="row menu-item-row">
+                <a href="/dogs" class="menu-button">Dogs</a>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <div class="row menu-item-row">
+                <img src="{{ url_for('static', filename ='assets/application-item.png') }}" alt="" class="menu-img">
+            </div>
+            <div class="row menu-item-row">
+                <a href="/applications" class="menu-button">Applications</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- end navbar -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

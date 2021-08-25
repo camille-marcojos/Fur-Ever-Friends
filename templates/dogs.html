@@ -1,60 +1,48 @@
-<html>
-    <head><title>Browse Dogs</title></head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
+    <title>Browse Dogs</title>
+</head>
+
+<body class="dogs-body">
+
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar -->
+
+    <h1 class="title">Dog Information</h1>
+
+    <div class="dogs-actions">
+        <button class="btn btn-primary add-dog-btn" onclick="window.location = '/add_dog'">Add a New Dog</button>
+        <form method="POST" action="/dogs">
+            <div class="dogs-actions-row">
+                <div class="dogs-input input-group">
+                    <input class="form-control rounded dog-searchbar" aria-label="Search" aria-describedby="search-addon"  type="text" name="dogSearch" placeholder="dog name..">
+                    <input type="submit" class="btn btn-primary" value="Search">
+                </div>
+                <div class="dogs-input input-group">
+                    <select class="form-control rounded dogstatus-dropdown" name="dogstatus">
+                        <option value="any">Any</option>
+                        <option value="Available">Available</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Adopted">Adopted</option>
+                    </select>
+                    <input class="btn btn-primary" type="submit" value="Filter Status">
+                </div>
+            </div>
     </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a class="active" href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
-
-
-
-
-<h1>Dogs</h1>
-
-    <button onclick="window.location = '/add_dog'">Add New Dog</button>
-    <form method="POST" action="/dogs">
-        <input type="text" name="dogSearch" placeholder="dog name..">
-        <input type="submit" value="Search">
-        <br />
-        <label>Status:</label>
-        <select name="dogstatus">
-            <option value="any">Any</option>
-            <option value="Available">Available</option>
-            <option value="Pending">Pending</option>
-            <option value="Adopted">Adopted</option>
-        </select>
-        <input type="submit" value="Filter">
-    <!--
+        <!--
     <label>Breed:</label>
     <select id ="dogbreed">
         <option value="">Any</option>
@@ -84,50 +72,107 @@
         <option value="large">Large</option>
     </select>
 -->
-<!--<form method="POST" action="/dogs">-->
-</form>
+        <!--<form method="POST" action="/dogs">-->
+    </form>
 
-<table>
-    <thead>
-        <tr>
-            <th>Pet ID</th>
-            <th>Shelter</th>
-            <th>Name</th>
-            <th>Birthday</th>
-            <th>Gender</th>
-            <th>Breed</th>
-            <th>Size</th>
-            <th>Status</th>
-            <th>Energy Level</th>
-            <th>Coat</th>
-            <th>Color</th>
-            <th>Dogs OK</th>
-            <th>Cats OK</th>
-            <th>Kids OK</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for r in rows %}
-        <tr>
-            <td>{{ r.0 }}</td>
-            <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
-            <td>{{ r[3] }}</td>
-            <td>{{ r[4] }}</td>
-            <td>{{ r[5] }}</td>
-            <td>{{ r[6] }}</td>
-            <td>{{ r[7] }}</td>
-            <td>{{ r[8] }}</td>
-            <td>{{ r[9] }}</td>
-            <td>{{ r[10] }}</td>
-            <td>{{ r[11] }}</td>
-            <td>{{ r[12] }}</td>
-            <td>{{ r[13] }}</td>
-            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_dog/{{r[0]}}'"> </td>
-            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_dog/{{r[0]}}'"> </td>
-        </tr>
+    <!-- <button onclick="window.location = '/add_dog'">Add New Dog</button>
+    <form method="POST" action="/dogs">
+        <input type="text" name="dogSearch" placeholder="dog name..">
+        <input type="submit" value="Search">
+        <br />
+        <label>Status:</label>
+        <select name="dogstatus">
+            <option value="any">Any</option>
+            <option value="Available">Available</option>
+            <option value="Pending">Pending</option>
+            <option value="Adopted">Adopted</option>
+        </select>
+        <input type="submit" value="Filter"> -->
+        <!--
+    <label>Breed:</label>
+    <select id ="dogbreed">
+        <option value="">Any</option>
+        {% for b in breeds %}
+        <option value="{{ b[0] }}">{{ b[0] }}</option>
         {% endfor %}
-    </tbody>
-</table>
-</div>
+    </select>
+    <label>Age:</label>
+    <select id="dogage">
+        <option value="any">Any</option>
+        <option value="puppy">Puppy</option>
+        <option value="young">Young</option>
+        <option value="adult">Adult</option>
+        <option value="Senior">Senior</option>
+    </select>
+    <label>Gender:</label>
+    <select id="doggender">
+        <option value="any">Any</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+    <label>Size:</label>
+    <select id="dogsize">
+        <option value="any">Any</option>
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+    </select>
+-->
+        <!--<form method="POST" action="/dogs">-->
+    <!-- </form> -->
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Pet ID</th>
+                    <th>Shelter</th>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th>Gender</th>
+                    <th>Breed</th>
+                    <th>Size</th>
+                    <th>Status</th>
+                    <th>Energy Level</th>
+                    <th>Coat</th>
+                    <th>Color</th>
+                    <th>Dogs OK</th>
+                    <th>Cats OK</th>
+                    <th>Kids OK</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td>{{ r.0 }}</td>
+                    <td>{{ r[1] }}</td>
+                    <td>{{ r[2] }}</td>
+                    <td>{{ r[3] }}</td>
+                    <td>{{ r[4] }}</td>
+                    <td>{{ r[5] }}</td>
+                    <td>{{ r[6] }}</td>
+                    <td>{{ r[7] }}</td>
+                    <td>{{ r[8] }}</td>
+                    <td>{{ r[9] }}</td>
+                    <td>{{ r[10] }}</td>
+                    <td>{{ r[11] }}</td>
+                    <td>{{ r[12] }}</td>
+                    <td>{{ r[13] }}</td>
+                    <td> <input class="btn btn-primary" type='button' name='Update' value='Update'
+                            onclick="window.location = '/update_dog/{{r[0]}}'"> </td>
+                    <td> <input class="btn btn-primary" type='button' name='Delete' value='Delete'
+                            onclick="window.location = '/delete_dog/{{r[0]}}'"> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+</body>
 </html>

@@ -1,103 +1,105 @@
-<html>
-    <head><title>Browse Adopters</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+    rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
+    <title>Browse Adopters</title>
+</head>
+
+<body class="form-body update-adopter-body">
+
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar -->
+
+    <div class="form-container">
+        <h1 class="update-adopter-title">Update Adopter Information</h1>
+        <form id="update_adopter" action="/update_adopter/{{adopter[0]}}" method="post">
+            <div class="row">
+              <div class="form-group col-md">
+                <label for="fname">First Name</label>
+                <input type="text" class="form-control" name="fname" id="fname" value="{{ adopter[1] }}" required="required">
+              </div>
+              <div class="form-group col-md">
+                <label for="lname">Last Name</label>
+                <input type="text" class="form-control" name="lname" id="lname" value="{{ adopter[2] }}" required="required">
+              </div>
+              <div class="form-group col-md">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" name="phone" id="phone" value="{{ adopter[7] }}" required="required">
+              </div>
+              <div class="form-group col-md">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" value="{{ adopter[8] }}" required="required">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="street">Address</label>
+              <input type="street" class="form-control" name="street" id="street" placeholder="street" value="{{ adopter[3] }}" required="required">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="city">City</label>
+                    <input type="city" class="form-control" name="city" id="city" placeholder="city" value="{{ adopter[4] }}" required="required">
+                </div>
+              <div class="form-group col-md-4">
+                <label for="state">State</label>
+                <input type="state" class="form-control" name="state" id="state" placeholder="state" value="{{ adopter[5] }}" required="required">
+              </div>
+              <div class="form-group col-md-2">
+                <label for="inputZip">Zip</label>
+                <input type="zip" class="form-control" name="zipcode" id="zipcode" placeholder="zip" value="{{ adopter[6] }}" required="required">
+              </div>
+            </div>
+            <div class="update-adopter-btn">
+                <a class="btn btn-primary" href="/adopters">Cancel</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
     </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a class="active" href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a  href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
 
-<h1>Adopters</h1>
-<div id="adopter_form">
-    <h2>Update Adopter:</h2><br/>
-    <form id="update_adopter" action="/update_adopter/{{adopter[0]}}" method="post">
-        <input type="hidden" name="adopterID" value = "{{ adopter[0] }}">
-        <label>First Name:</label>
-        <input type="text" name="fname" id="fname" value="{{ adopter[1] }}">
-        <br />
-        <label>Last Name:</label>
-        <input type="text" name="lname" id="lname" value="{{ adopter[2] }}">
-        <br />
-        <label>Phone Number:</label>
-        <input type="tel" name="phone" id="phone" value="{{ adopter[7] }}">
-        <br />
-        <label>E-mail Address:</label>
-        <input type="email" name="email" id="email" value="{{ adopter[8] }}">
-        <br />
-        <label>Address:</label><br />
-        <input type="street" name="street" id="street" placeholder="street" value="{{ adopter[3] }}"> <br />
-        <input type="city" name="city" id="state" placeholder="city" value="{{ adopter[4] }}">
-        <input type="state" name="state" id="state" placeholder="state" value="{{ adopter[5] }}">
-        <input type="zip" name="zipcode" id="zipcode" placeholder="zip" value="{{ adopter[6] }}"> <br />
+      
 
-        <input type="submit" value="Submit">
-    </form>
-</div>
-<div>
-    <input type="search" id="adopterSearch" placeholder="Search for adopter.."><button>Search</button><br />
-</div>
-<div>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>E-mail</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for r in rows %}
-        <tr>
-            <td>{{ r[0] }}</td>
-            <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
-            <td>{{ r[7] }}</td>
-            <td>{{ r[8] }}</td>
-            <td>{{ r[3] }}</td>
-            <td>{{ r[4] }}</td>
-            <td>{{ r[5] }}</td>
-            <td>{{ r[6] }}</td>
-            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_adopter/{{r[0]}}'"> </td>
-            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_adopter/{{r[0]}}'"> </td>
 
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-</div>
+    <!-- <div id="adopter_form">
+        <h2>Update Adopter:</h2><br />
+        <form id="update_adopter" action="/update_adopter/{{adopter[0]}}" method="post">
+            <input type="hidden" name="adopterID" value="{{ adopter[0] }}">
+            <label>First Name:</label>
+            <input type="text" name="fname" id="fname" value="{{ adopter[1] }}">
+            <br />
+            <label>Last Name:</label>
+            <input type="text" name="lname" id="lname" value="{{ adopter[2] }}">
+            <br />
+            <label>Phone Number:</label>
+            <input type="tel" name="phone" id="phone" value="{{ adopter[7] }}">
+            <br />
+            <label>E-mail Address:</label>
+            <input type="email" name="email" id="email" value="{{ adopter[8] }}">
+            <br />
+            <label>Address:</label><br />
+            <input type="street" name="street" id="street" placeholder="street" value="{{ adopter[3] }}"> <br />
+            <input type="city" name="city" id="state" placeholder="city" value="{{ adopter[4] }}">
+            <input type="state" name="state" id="state" placeholder="state" value="{{ adopter[5] }}">
+            <input type="zip" name="zipcode" id="zipcode" placeholder="zip" value="{{ adopter[6] }}"> <br />
+
+            <input type="submit" value="Submit">
+        </form>
+    </div> -->
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+</body>
 </html>

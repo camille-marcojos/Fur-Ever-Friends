@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/camillemarcojos/Projects/Pet Match App/venv/bin/python3"
+    "python.pythonPath": "/Users/camillemarcojos/Projects/Pet Match App/venv/bin/python3",
+    "liveServer.settings.port": 5501
 }

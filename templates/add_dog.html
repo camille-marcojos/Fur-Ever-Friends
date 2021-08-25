@@ -1,105 +1,128 @@
-<html>
-    <head><title>Add Dog</title></head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
+    <title>Add Dog</title>
+</head>
+
+<body class="form-body add-dog-body">
+
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar -->
+
+    <h1 class="title">Add a Dog</h1>
+
+    <div id="dogform" class="form-container">
+        <form id="add_dog" action="/add_dog" method="post">
+            <div class="row">
+                <div class="form-group col-md">
+                    <label>Dog Name:</label>
+                    <input class="form-control" type="text" name="dogname" id="dogname" required="required">
+                </div>
+                <div class="form-group col-md">
+                    <label>Birthdate:</label>
+                    <input class="form-control" type="date" name="birthday" id="birthday" required="required">
+                </div>
+                <div class="form-group col-md">
+                    <label>Adoption Satus:</label>
+                    <select class="form-control" id="dogstatus" name="dogstatus" required>
+                        <option selected value="">Select Status</option>
+                        <option value="Available">Available</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Adopted">Adopted</option>
+                    </select>    
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md">
+                    <label>Breed:</label>
+                    <input class="form-control" type="text" name="breed" id="breed" required="required">
+                </div>
+                <div class="form-group col-md">
+                    <label>Gender:</label>
+                    <select class="form-control" id="doggender" name="doggender" required>
+                        <option selected value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group col-md">
+                    <label>Size (adult):</label>
+                    <select class="form-control" id="dogsize" name="dogsize" required>
+                        <option selected value="">Select Size</option>
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md">
+                    <label>Energy Level:</label>
+                    <select class="form-control" id="energy" name="energy" required>
+                        <option selected value="">Select Energy Level</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group col-md">
+                    <label>Coat Type:</label>
+                    <input class="form-control" type="text" id="coat" name="coat" required="required">
+                </div>
+                <div class="form-group col-md">
+                    <label>Color:</label>
+                    <input class="form-control" type="text" name="color" id="color" required="required">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md">
+                    <label>Dogs OK?</label>
+                    <select class="form-control" id="dogsOK" name="dogsOK" required>
+                        <option selected value="">Select</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+                <div class="form-group col-md">
+                    <label>Kids OK?</label>
+                    <select class="form-control" id="kidsOK" name="kidsOK" required>
+                        <option selcted value="">Select</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+                <div class="form-group col-md">
+                    <label>Cats OK?</label>
+                    <select class="form-control" id="catsOK" name="catsOK" required>
+                        <option selected value="">Select</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="add-dog-form-btn">
+                <a class="btn btn-primary" href="/dogs">Cancel</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a class="active" href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
 
+</body>
 
-<div id="dogform">
-    <h2>Add Dog:</h2><br />
-    <form id="add_dog" action="/add_dog" method ="post">
-        <label>Dog Name:</label>
-        <input type="text" name="dogname" id="dogname">
-        <br/>
-        <label>Birthdate:</label>
-        <input type="date" name="birthday" id="birthday">
-        <br />
-        <label>Breed:</label>
-        <input type= "text" name="breed" id="breed">
-        </br />
-        <label>Gender:</label>
-        <select id="doggender" name="doggender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        <label>Size(fullgrown):</label>
-        <select id="dogsize" name ="dogsize">
-            <option value="Small">Small</option>
-            <option value="Medium">Medium</option>
-            <option value="Large">Large</option>
-        </select>
-        </br />
-        <label>Adoption Satus:</label>
-        <select id="dogstatus" name ="dogstatus">
-            <option value="Available">Available</option>
-            <option value="Pending">Pending</option>
-            <option value="Adopted">Adopted</option>
-        </select>
-        </br />
-        <label>Energy Level:</label>
-        <select id="energy" name="energy">
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-        </select>
-        </br />
-        <label>Coat Type:</label>
-        <input type="text" id="coat" name ="coat">
-        </br />
-        <label>Color:</label>
-        <input type="text" name="color" id="color">
-        </br />
-        <label>Dogs OK?</label>
-        <select id="dogsOK" name="dogsOK" >
-            <option value="Y">Yes</option>
-            <option value="N">No</option>
-        </select>
-        </br />
-        <label>Kids OK?</label>
-        <select id="kidsOK" name="kidsOK">
-            <option value="Y">Yes</option>
-            <option value="N">No</option>
-        </select>
-    </br />
-    <label>Cats OK?</label>
-    <select id="catsOK" name="catsOK">
-        <option value="Y">Yes</option>
-        <option value="N">No</option>
-    </select>
-    <br />
-    <input type="submit">
-</form>
-</div>
 </html>

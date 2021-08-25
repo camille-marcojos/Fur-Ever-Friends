@@ -1,50 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+    rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   <!-- metadate goes in head -->
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-   
-   <title>View Applications</title>
+    <title>View Applications</title>
 </head>
-<body>
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
-    </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a class="active" href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
+<body class="application-body form-body">
 
-<h1>Applications</h1>
-<!-- WILL UPDATE SEARCHES AT A LATER TIME <form>
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar --> 
+
+    <h1 class="title">Applications</h1>
+    <!-- WILL UPDATE SEARCHES AT A LATER TIME <form>
    <fieldset>
       <legend>Search for an application by:</legend>
       <label for="appID">App ID:</label>
@@ -61,49 +39,61 @@
         <button>Search</button>
    </fieldset>
 </form> -->
-<br>
-<button onclick="window.location.href = '/add_application';">Add New Application</button>
-<button onclick="window.location.href = '/adoption_details';">Add a Dog to an Application</button><br><br>
-<table>
- <thead>
-  <tr>
-   <th> App ID
-   <th> Date
-   <th> Shelter
-   <th> Adopter
-   <th> Counselor
-   <th> Dog #1
-   <th> Dog #2
-   <th> Dog #3
-   <th> Meet & Greet?
-   <th> # of Adults
-   <th> # of Children
-   <th> # of Pets
-   <th> Home Type
-   <th> Home Status
-   <th> &nbsp;
-   <th> &nbsp;
- <tbody>
-    {% for r in rows %}
-  <tr>
-    <td> {{ r[0] }}</td>
-    <td> {{ r[1] }}</td>
-    <td> {{ r[2] }}</td>
-    <td> {{ r[3] }}</td>
-    <td> {{ r[4] }}</td>
-    <td> {{ r[5] }}</td>
-    <td> {{ r[6] }}</td>
-    <td> {{ r[7] }}</td>
-    <td> {{ r[8] }}</td>
-    <td> {{ r[9] }}</td>
-    <td> {{ r[10] }}</td>
-    <td> {{ r[11] }}</td>
-    <td> {{ r[12] }}</td>
-    <td> {{ r[13] }}</td>
-    <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_application/{{r[0]}}'"> </td>
-    <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_application/{{r[0]}}'"> </td> 
-   </tr>
-   {% endfor %}
-</table>
+    <div class="applications-actions">
+        <button class="btn btn-primary" onclick="window.location.href = '/add_application';">Add New Application</button>
+        <button class="btn btn-primary" onclick="window.location.href = '/adoption_details';">View Adoption Status</button><br><br>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> App ID
+                    <th> Date
+                    <th> Shelter
+                    <th> Adopter
+                    <th> Counselor
+                    <th> Dog #1
+                    <th> Dog #2
+                    <th> Dog #3
+                    <th> Meet & Greet?
+                    <th> # of Adults
+                    <th> # of Children
+                    <th> # of Pets
+                    <th> Home Type
+                    <th> Home Status
+                    <th> &nbsp;
+                    <th> &nbsp;
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td> {{ r[0] }}</td>
+                    <td> {{ r[1] }}</td>
+                    <td> {{ r[2] }}</td>
+                    <td> {{ r[3] }}</td>
+                    <td> {{ r[4] }}</td>
+                    <td> {{ r[5] }}</td>
+                    <td> {{ r[6] }}</td>
+                    <td> {{ r[7] }}</td>
+                    <td> {{ r[8] }}</td>
+                    <td> {{ r[9] }}</td>
+                    <td> {{ r[10] }}</td>
+                    <td> {{ r[11] }}</td>
+                    <td> {{ r[12] }}</td>
+                    <td> {{ r[13] }}</td>
+                    <td> <input class="btn btn-primary" type='button' name='Update' value='Update'
+                            onclick="window.location = '/update_application/{{r[0]}}'"> </td>
+                    <td> <input class="btn btn-primary" type='button' name='Delete' value='Delete'
+                            onclick="window.location = '/delete_application/{{r[0]}}'"> </td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
 </body>
+
 </html>

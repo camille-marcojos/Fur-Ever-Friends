@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 from flask import request, redirect
 from db_connector.db_connector import connect_to_database, execute_query
+from flask import Flask, url_for
+
 #create the web application
 app = Flask(__name__)
 
@@ -475,11 +477,11 @@ def adopters():
 
         return render_template('adopters.html', rows=result)
     elif request.method == 'POST':
-        search = '%' + request.form['adopterSearch'] + '%'
         button = request.form['submit_button']
         #adopterSearch = request.form['adopterSearch']
         if button == 'Search':
             #query to search adopters
+            search = '%' + request.form['adopterSearch'] + '%'
             query = "SELECT * FROM Adopters WHERE first_name LIKE %s OR last_name LIKE %s OR phone LIKE %s OR email LIKE %s OR street LIKE %s OR city LIKE %s OR state LIKE %s OR zip LIKE %s;"
             data = (search, search, search, search, search, search, search, search)
             result = execute_query(db_connection, query, data).fetchall()

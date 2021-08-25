@@ -1,94 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+    rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   <!-- metadate goes in head -->
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-   
-   <title>Counselors</title>
+    <title>Counselors</title>
 </head>
-<body>
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
+<body class="counselors-body">
+
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar -->
+
+    <h1 class="title">Counselor Information</h1>
+
+    <div class="counselors-actions">
+        <!-- Button trigger modal -->
+        <div class="modal-button add-counselor-btn">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"data-bs-target="#exampleModal2">
+                Add a New Counselor
+            </button>
+        </div>
     </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a class="active" href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
 
-<h1>Counselors</h1>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add A New Counselor</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="addcounselor" action="/counselors" method="post">
+                        <div class="row">
+                            <div class="form-group col-md">
+                            <label for="firstName">First Name:</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName" required="required">
+                                </div>
+                            <div class="form-group col-md">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName" required="required">
+                            </div>
+                            <div class="form-group col-md">
+                                <label for="shelterID">Shelter:</label>
+                                <select id="shelter-dropdown" class="form-control" name="shelterID" required>
+                                    <!--<option value="">Select Shelter</option> CAN ADD THIS FUNCTION LATER IF ADDING MORE SHELTERS -->
+                                    <option selected value="">Select Shelter</option>
+                                    {% for s in shelters %}
+                                    <option value="{{ s[0] }}">{{ s[1] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" type="button" data-bs-dismiss="modal" value="Close">
+                                <button class="btn btn-primary" type="submit">Add</button>
+                            </div>
+                        </div>
+                    </form>
 
-<p>This page will show all the counselors employed by the shelter.</p>
 
-<form id="addcounselor" action="/counselors" method="post">
-    <fieldset>
-    	<legend>Add a Counselor</legend>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <label for="firstName">First Name:</label>
-        <input name="firstName" id="firstName" type="text">
 
-        <label for="lastName">Last Name:</label>
-        <input name="lastName" id="lastName" type="text">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> Counselor ID
+                    <th> First Name
+                    <th> Last Name
+                    <th> Shelter
+                    <th> &nbsp;
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td> {{ r[0] }}</td>
+                    <td> {{ r[1] }}</td>
+                    <td> {{ r[2] }}</td>
+                    <td> {{ r[3] }}</td>
+                    <td> <input class="btn btn-primary" type='button' name='Update' value='Update'
+                            onclick="window.location = '/update_counselor/{{r[0]}}'"> </td>
+                    <td> <input class="btn btn-primary" type='button' name='Delete' value='Delete'
+                            onclick="window.location = '/delete_counselor/{{r[0]}}'"> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-        <label for="shelterID">Shelter:</label>
-        <select name="shelterID">
-            <!--<option value="">Select Shelter</option> CAN ADD THIS FUNCTION LATER IF ADDING MORE SHELTERS -->
-            {% for s in shelters %}
-            <option value="{{ s[0] }}">{{ s[1] }}</option>
-            {% endfor %}
-        </select>
-        <button>Add</button>
-    </fieldset>
-</form>
-
-<table>
- <thead>
-  <tr>
-   <th> Counselor ID
-   <th> First Name
-   <th> Last Name
-   <th> Shelter
-   <th> &nbsp;
- <tbody>
-    {% for r in rows %}
-    <tr>
-        <td> {{ r[0] }}</td>
-        <td> {{ r[1] }}</td>
-        <td> {{ r[2] }}</td>
-        <td> {{ r[3] }}</td>
-        <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_counselor/{{r[0]}}'"> </td>
-        <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_counselor/{{r[0]}}'"> </td>
-      </tr>
-      {% endfor %}
- </tbody>
-</table>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>    
 </body>
 </html>

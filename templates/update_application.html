@@ -1,83 +1,95 @@
-<html>
-    <head><title>Update Application</title></head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<!-- NAV BAR -->
-<nav>
-    <div class="logo">
-    </div>
-    </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a class="active" href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
-<h1>Update Application:</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<button onclick="window.location.href = '/adoption_details';">Add a Dog to an Application</button><br><br>
-<form id="update_application" action="/update_application/{{app[0]}}" method="post">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <title>Update Application</title>
+</head>
+
+<body>
+
+
+    <!-- NAV BAR -->
+    <nav>
+        <div class="logo">
+        </div>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/adopters">Adopters</a>
+            </li>
+            <li>
+                <a href="/counselors">Counselors</a>
+            </li>
+            <li>
+                <a href="/dogs">Dogs</a>
+            </li>
+            <li>
+                <a href="/add_dog">Add Dog</a>
+            </li>
+            <li>
+                <a class="active" href="/applications">Applications</a>
+            </li>
+            <li>
+                <a href="/add_application">New Application</a>
+            </li>
+            <li>
+                <a href="/adoption_details">Adoption Details</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- end navbar -->
+    <h1>Update Application:</h1>
+
+    <button onclick="window.location.href = '/adoption_details';">Add a Dog to an Application</button><br><br>
+    <form id="update_application" action="/update_application/{{app[0]}}" method="post">
         <input type="hidden" name="app_id" value="{{ app[0] }}">
         <input type="hidden" name="adopter_id" value="{{ app[4] }}">
         {% for a in adopters %}
         {% if a[0] == app[4] %}
-            First Name: <input type="text" name="fname" value="{{ a[2] }}"><br>
+        First Name: <input type="text" name="fname" value="{{ a[2] }}"><br>
         {% endif %}
         {% endfor %}
-        
+
         {% for a in adopters %}
         {% if a[0] == app[4] %}
-            Last Name: <input type="text" name="lname" value="{{ a[3] }}"><br>
+        Last Name: <input type="text" name="lname" value="{{ a[3] }}"><br>
         {% endif %}
         {% endfor %}
         <label for="shelterID">Shelter:</label>
         <select name="shelterID">
-        {% for s in shelters %}
+            {% for s in shelters %}
             {{ s[0] }}
             {{ app[2] }}
             {% if s[0] == app[2] %}
-                <option selected value="{{ s[0] }}">{{ s[1] }}</option>
+            <option selected value="{{ s[0] }}">{{ s[1] }}</option>
             {% else %}
-                <option value="{{ s[0] }}">{{ s[1] }}</option>
+            <option value="{{ s[0] }}">{{ s[1] }}</option>
             {% endif %}
-        {% endfor %}
-        </select><br> 
+            {% endfor %}
+        </select><br>
 
         <area for="counselorID">Counselor:</label>
         <select name="counselorID">
-        <option value = "">Select Counselor</option>
-        {% for c in counselors %}
+            <option value="">Select Counselor</option>
+            {% for c in counselors %}
             {{ c[0] }}
             {{ app[3] }}
             {% if c[0] == app[3] %}
-                <option selected value="{{ c[0] }}">{{ c[2] }} {{ c[3] }}</option>
+            <option selected value="{{ c[0] }}">{{ c[2] }} {{ c[3] }}</option>
             {% else %}
-                <option value="{{ c[0] }}">{{ c[2] }} {{ c[3] }}</option>
+            <option value="{{ c[0] }}">{{ c[2] }} {{ c[3] }}</option>
             {% endif %}
-        {% endfor %}
+            {% endfor %}
         </select><br>
-        
+
         <!-- NO LONGER IMPLEMENTING UPDATES TO DOGS ON APP UPDATE
         <label for="petID1">Dog #1:</label>
         <select name="petID1">
@@ -120,33 +132,36 @@
             {% endif %}
         {% endfor %}
         </select><br>-->
-    
+
         <label for="meetGreet">Meet & Greet:</label>
         <select name="meetGreet">
-        <option {% if app[8] == 'N/A' %} selected {% endif %}> N/A</option>
-        <option {% if app[8] == 'Required' %} selected {% endif %}> Required</option>
-        <option {% if app[8] == 'Completed' %} selected {% endif %}> Completed</option>
+            <option {% if app[8]=='N/A' %} selected {% endif %}> N/A</option>
+            <option {% if app[8]=='Required' %} selected {% endif %}> Required</option>
+            <option {% if app[8]=='Completed' %} selected {% endif %}> Completed</option>
         </select><br>
 
         Number of Adults(18 years or older): <input type="number" name="numAdults" value="{{ app[9] }}"><br>
         Number of Children: <input type="number" name="numChildren" value="{{ app[10] }}"><br>
         Number of Pets: <input type="number" name="numPets" value="{{ app[11] }}"><br>
-        
+
         <label for="homeType">Home Type:</label>
         <select name="homeType">
-        <option {% if app[12] == 'Single-family home' %} selected {% endif %}> Single-family home</option>
-        <option {% if app[12] == 'Multi-family home' %} selected {% endif %}> Multi-family home</option>
-        <option {% if app[12] == 'Apartment' %} selected {% endif %}> Apartment</option>
-        <option {% if app[12] == 'Condo' %} selected {% endif %}> Condo</option>
-        <option {% if app[12] == 'Duplex' %} selected {% endif %}> Duplex</option>
+            <option {% if app[12]=='Single-family home' %} selected {% endif %}> Single-family home</option>
+            <option {% if app[12]=='Multi-family home' %} selected {% endif %}> Multi-family home</option>
+            <option {% if app[12]=='Apartment' %} selected {% endif %}> Apartment</option>
+            <option {% if app[12]=='Condo' %} selected {% endif %}> Condo</option>
+            <option {% if app[12]=='Duplex' %} selected {% endif %}> Duplex</option>
         </select><br>
         <label for="homeStatus">Home Status:</label>
         <select name="homeStatus">
-        <option {% if app[13] == 'Homeowner' %} selected {% endif %}> Homeowner</option>
-        <option {% if app[13] == 'Renter' %} selected {% endif %}> Renter</option>
-        <option {% if app[13] == 'Lives with Parents' %} selected {% endif %}> Lives with Parents</option>
+            <option {% if app[13]=='Homeowner' %} selected {% endif %}> Homeowner</option>
+            <option {% if app[13]=='Renter' %} selected {% endif %}> Renter</option>
+            <option {% if app[13]=='Lives with Parents' %} selected {% endif %}> Lives with Parents</option>
         </select><br>
 
         <input type="submit">
 
-</form>
+    </form>
+</body>
+
+</html>

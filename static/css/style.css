@@ -1,65 +1,437 @@
-nav{
-    padding-top: 20px;
-    padding-bottom: 50px;
-    padding-right: 20px;
-    align-content: center;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
-div.logo{
-    display: block;
-    float: left;
-	color: black;
-	text-transform: uppercase;
-	letter-spacing: 5px;
-	font-size: 30px;
-    font-weight: bold;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
 }
-.nav-links li{
+body {
+	line-height: 1;
+}
+ol, ul {
 	list-style: none;
 }
-.nav-links a{
-    display: block;
-    float: left;
-	color: black;
-    text-decoration: none;
-    text-align: center;
-	letter-spacing: 3px;
-	padding: 10px 10px;
-	font-size: 18px;
+blockquote, q {
+	quotes: none;
 }
-.nav-links a:hover {
-	background-color: black;
-  	color: white;
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
 }
-.nav-links a.active {
-	background-color: #B5D4BD;
-	color: white;
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-/*****
-h1 {
-    margin: auto;
-    text-align: center;
-    padding-top: 8px;
-	padding-bottom: 8px;
+/*** NAVIGATION ***/
+
+.nav-bar-container{
+	font-family: 'Rubik', sans-serif;
+	font-size: 62.5%;
+	border-bottom: 1px solid #264653;
 }
-h2 {
-    text-align: center;
-	margin: auto;
-	width: 80%;
-	background-color: #B5D4BD;
-	color: white;
+
+.navbar {
+	background-color: #2A9D8F;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 1.5rem;
 }
-h3 {
-	margin:auto;
+
+.navbar a{
+	list-style: none;
+	text-decoration: none;
+} 
+
+.nav-bar li a{
+	text-decoration: none;
+}
+
+.hamburger {
+	display: none;
+}
+
+.bar{
+	display: block;
+	width: 25px;
+	height: 3px;
+	margin: 5px auto;
+	-webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #264653;
+	border-radius: 20px;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	z-index: 7;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+.nav-link{
+    font-size: 1.6rem;
+    font-weight: 400;
+    color:#E9C46A;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.nav-logo:hover, .nav-link:hover {
+    color: #E76F51;
+
+}
+
+.active-link {
+	background-color: #264653;;
+}
+
+.nav-logo {
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: #264653;
+} 
+
+@media only screen and (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 4.25rem;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow:
+        0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+		height: 100%;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+	
+	.hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+
+}
+
+/** NOTE: to clear browser cache and view change hold shift + reload page 
+/*** INDEX PAGE ***/
+.menu-header{
+	color: #264653;
+	margin: 2em;
+}
+
+h1{
+	font-size: 2em;
 	text-align: center;
-	width:80%;
+	font-weight: 600;
+  	letter-spacing: 1px;
+	line-height: 1.5;
+
 }
-h4 {
-	margin:auto;
-	width: 80%;
+
+h2{
+	font-size: 1.5em;
+	font-weight: 600;
+  	letter-spacing: .5px;
+	line-height: 1.5;
+
 }
-p{
+
+.index-subtitle{
+	font-size: 1.5em;
+	text-align: center;
+  	letter-spacing: 1px;
+
+}
+
+.index-body {
+	background-color:#2a9d8f;
+	font-family: 'Rubik', sans-serif; 
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+ .menu-items-table {
+	background-color: white;
+	border-radius: 10px;
+	padding: 40px 40px;
+	width: 100%;
+	max-width: 960px;
+	display: flex; 
+	flex-direction: column;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.menu-item {
+	border-bottom: 1px solid #e1f1ff;
+	margin: 0px 10px;
+}
+
+.menu-item:last-child{
+	border-bottom: none;
+} 
+
+.menu-img{
+	margin-bottom: 25px;
+	width: 100%;
+	max-width: 100%;
+}
+
+.menu-button {
+	border: 1px solid #E9C46A;
+	border-radius: 10px;
+	color: #F4A261; 
+	display: inline-block;
+	padding: 15px 0px;
+	text-decoration: none;
+	margin: 25px 0px;
+	width: 75%;
+	transition: background-color 200ms ease-in-out;
+}
+
+.menu-item:nth-of-type(3) .menu-item-row:nth-of-type(2) .menu-button {
+	width: 50%;
+}
+
+.menu-button:hover, .menu-button:focus {
+	background-color: #E9C46A;
+	color: #F4A261; 
+}
+
+.menu-item-row {
+	/* border: red solid 1px; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin: auto;
-	width: 80%;
 }
-****/
+
+@media (min-width: 900px){
+	.menu-items-table {
+		flex-direction: row;
+	}
+
+	.menu-item {
+		border-bottom: none;
+		margin: 0;
+		border-right: 1px solid #e1f1ff;
+	}
+
+	.menu-item:last-child{
+		border-right: none;
+	} 
+}
+ 
+/** ADOPTERS PAGE **/
+body{
+	font-family: 'Rubik', sans-serif;
+}
+
+.adopter-title{
+	margin-top: 25px;
+}
+th {
+	font-weight: 600;
+}
+
+.btn-primary {
+	background-color: #E9C46A;
+	border: 1px solid #E9C46A;
+}
+
+.btn-primary:hover {
+	background-color: #E76F51;
+	border: 1px solid #E9C46A;
+}
+
+.modal-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 25px;
+}
+
+#search_adopter_form {
+	width: 50%;
+	margin: 25px;
+}
+
+.adopters-actions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+/** UPDATE ADOPTERS PAGE **/
+.form-group {
+	margin: 10px 0px;
+}
+
+.update-adopter-btn{
+	text-align: right;
+}
+
+.form-container {
+	margin: 10px 25px;
+	text-align: left;
+}
+
+label {
+	font-weight: 600;
+}
+
+.update-adopter-title {
+	margin-bottom: 25px;
+}
+
+@media (min-width: 900px){
+	.form-body {
+		text-align: center;
+	}
+
+	.form-container {
+		margin-top: 25px ;
+		width: 70%;
+		text-align: left;
+		display: inline-block;
+	}
+
+}
+
+/** COUNSELORS PAGE **/
+.title {
+	margin-top: 25px;
+}
+
+.add-counselor-btn {
+	margin-top: 25px;
+	margin-bottom: 50px;
+}
+
+
+@media only screen and (max-width: 900px){
+	.applications-actions {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		width: 100%;
+	}
+}
+
+/** DOGS PAGE **/
+.dogs-actions {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.dogstatus-dropdown {
+	margin-left: 25px;
+}
+
+.dogs-actions-row {
+	display: flex;
+}
+
+.dogs-input {
+	margin: 25px 0px;
+}
+
+.add-dog-btn {
+	margin-top: 25px;
+}
+
+/** ADD DOG PAGE **/
+.add-dog-form-btn {
+	text-align: right;
+}
+
+.add-dog-modal-button{
+	margin-top: 35px;
+	margin-bottom: 20px;
+}
+
+/** UPDATE DOG PAGE **/
+
+
+/** ADD APPLICATION PAGE **/
+.add-application-btn{
+	text-align: right;
+}
+
+.add-adopter-btn-container{
+	display: flex;
+}
+
+.add-adopter-btn{
+	margin-top: auto;
+}
+
+/** ADOPTION DETAILS PAGE **/
+.adoption-details-title {
+	margin-bottom: 25px;
+}

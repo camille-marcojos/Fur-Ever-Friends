@@ -1,53 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+    rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   <!-- metadate goes in head -->
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-   
-   <title>Adoption Details</title>
+    <title>Adoption Details</title>
 </head>
+
 <body>
 
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
-    </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a class="active" href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar -->
 
-<h1>Adoption Details</h1>
+    <h1 class="title adoption-details-title">Adoption Details</h1>
 
-<p>This page shows the status of submitted applications. Users can update the application status, and add or delete a pet from an application.</p>
-
-<!-- WILL IMPLEMENT SEARCHES AT A LATER TIME<form>
+    <!-- WILL IMPLEMENT SEARCHES AT A LATER TIME<form>
   <fieldset>
      <legend>Search by:</legend>
      <label for="appID">App ID:</label>
@@ -85,63 +60,74 @@
        <button>Search</button>
   </fieldset>
 </form> -->
-<br>
 
-<form id="addadoptiondetail" action="/adoption_details" method="post">
-    <fieldset>
-      <legend>Add a pet to an application</legend>
+    <!-- MAY IMPLEMENT AT A LATER TIME -->
+    <!-- <form id="addadoptiondetail" action="/adoption_details" method="post">
+        <fieldset>
+            <legend>Add a pet to an application</legend>
 
-        <label for="appID">Application</label>
-        <select name="appID">
-            <option value="">Select Application</option>
-            {% for a in apps %}
-            <option value="{{ a[0] }}">{{ a[2] }} {{ a[3] }}</option>
-            {% endfor %}
-        </select><br> 
+            <label for="appID">Application</label>
+            <select name="appID">
+                <option value="">Select Application</option>
+                {% for a in apps %}
+                <option value="{{ a[0] }}">{{ a[2] }} {{ a[3] }}</option>
+                {% endfor %}
+            </select><br>
 
-        <label for="petID">Pet Name:</label>
-        <select name="petID">
-            <option value="">Select Pet</option>
-            {% for p in pets %}
-            <option value="{{ p[0] }}">{{ p[1] }}</option>
-            {% endfor %}
-        </select><br>
+            <label for="petID">Pet Name:</label>
+            <select name="petID">
+                <option value="">Select Pet</option>
+                {% for p in pets %}
+                <option value="{{ p[0] }}">{{ p[1] }}</option>
+                {% endfor %}
+            </select><br>
 
-        Status:
-        <select name="appStatus">
-        <option>Pending</option>
-        <option>Approved</option>
-        <option>Denied</option>
-        </select>
-        <button>Add</button>
-    </fieldset>
-</form>
+            Status:
+            <select name="appStatus">
+                <option>Pending</option>
+                <option>Approved</option>
+                <option>Denied</option>
+            </select>
+            <button>Add</button>
+        </fieldset>
+    </form> -->
 
-<table>
- <thead>
-  <tr>
-   <th> App ID
-   <th> Adopter's First Name
-   <th> Adopter's Last Name
-   <th> Counselor ID
-   <th> Dog's Name
-   <th> Status
-   <th> &nbsp;
- <tbody>
-    {% for r in rows %}
-  <tr>
-    <td> {{ r[0] }}</td>
-    <td> {{ r[1] }}</td>
-    <td> {{ r[2] }}</td>
-    <td> {{ r[3] }}</td>
-    <td> {{ r[4] }}</td>
-    <td> {{ r[5] }}</td>
-    <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_adoption/{{r[0]}},{{r[6]}}'"> </td>
-    <td> <input type='button' name='Update' value='Update Status' onclick="window.location = '/update_adoption/{{r[0]}},{{r[6]}}'"> </td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th> App ID
+                    <th> Adopter's First Name
+                    <th> Adopter's Last Name
+                    <th> Counselor ID
+                    <th> Dog's Name
+                    <th> Status
+                    <th> &nbsp;
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td> {{ r[0] }}</td>
+                    <td> {{ r[1] }}</td>
+                    <td> {{ r[2] }}</td>
+                    <td> {{ r[3] }}</td>
+                    <td> {{ r[4] }}</td>
+                    <td> {{ r[5] }}</td>
+                    <!-- DONT WANT THE OPTION TO DELETE -->
+                    <!-- <td> <input type='button' name='Delete' value='Delete'
+                            onclick="window.location = '/delete_adoption/{{r[0]}},{{r[6]}}'"> </td> -->
+                    <td> <input type='button' name='Update' value='Update Status'
+                            onclick="window.location = '/update_adoption/{{r[0]}},{{r[6]}}'"> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
 
 </body>
+
 </html>

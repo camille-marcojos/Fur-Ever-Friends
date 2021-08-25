@@ -1,102 +1,122 @@
-<html>
-    <head><title>Browse Adopters</title></head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
-<!-- NAV BAR -->
-<nav>
-	<div class="logo">
-	</div>
+    <link type='text/css' href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Browse Adopters</title>
+</head>
+
+<body class="adopters-body">
+
+    <!-- NAV BAR -->
+    {% include "navbar.html" %}
+    <!-- end navbar -->
+
+    <h1 class="title">Adopter Information</h1>
+    <div class="adopters-actions">
+        <form id="search_adopter_form" action="/adopters" method="post">
+            <div class="input-group">
+                <input type="search" name="adopterSearch" class="form-control rounded" placeholder="Search" aria-label="Search"
+                aria-describedby="search-addon" />
+                <input type="submit" name="submit_button" class="btn btn-primary search-adopters" value="Search">
+            </div>
+        </form>
+        
+        <!-- Button trigger modal -->
+        <div class="modal-button">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add a New Adopter
+            </button>
+        </div>
     </div>
-    <ul class="nav-links">
-        <li>
-            <a href="/">Home</a>
-        </li>
-        <li>
-            <a class="active" href="/adopters">Adopters</a>
-        </li>
-        <li>
-            <a href="/counselors">Counselors</a>
-        </li>
-        <li>
-            <a href="/dogs">Dogs</a>
-        </li>
-        <li>
-            <a href="/add_dog">Add Dog</a>
-        </li>
-        <li>
-            <a  href="/applications">Applications</a>
-        </li>
-        <li>
-            <a href="/add_application">New Application</a>
-        </li>
-        <li>
-            <a href="/adoption_details">Adoption Details</a>
-        </li>
-    </ul>
-</nav>
-<!-- end navbar --> 
 
-<h1>Adopters</h1>
-<div id="adopter_form">
-    <h2>Add New Adopter:</h2><br/>
-    <form id="adopter_form" action="/adopters" method="post">
-        <label>First Name:</label>
-        <input type="text" name="fname" id="fname">
-        <br />
-        <label>Last Name:</label>
-        <input type="text" name="lname" id="lname">
-        <br />
-        <label>Phone Number:</label>
-        <input type="tel" name="phone" id="phone">
-        <br />
-        <label>E-mail Address:</label>
-        <input type="email" name="email" id="email">
-        <br />
-        <label>Address:</label><br />
-        <input type="street" name="street" id="street" placeholder="street"> <br />
-        <input type="city" name="city" id="state" placeholder="city">
-        <input type="state" name="state" id="state" placeholder="state">
-        <input type="zip" name="zipcode" id="zipcode" placeholder="zip"> <br />
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add A New Adopter</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="adopter_form">
+                        <form id="adopter_form" action="/adopters" method="post">
+                            <label>First Name:</label>
+                                <input class="form-control" type="text" name="fname" id="fname" required="required">
+                            <br />
+                            <label>Last Name:</label>
+                            <input class="form-control" type="text" name="lname" id="lname" required="required">
+                            <br />
+                            <label>Phone Number:</label>
+                            <input class="form-control" type="tel" name="phone" id="phone" required="required">
+                            <br />
+                            <label>E-mail Address:</label>
+                            <input class="form-control" type="email" name="email" id="email" required="required">
+                            <br />
+                            <label>Address:</label><br />
+                            <input class="form-control" type="street" name="street" id="street" placeholder="street" required="required">
+                            <input class="form-control" type="city" name="city" id="state" placeholder="city" required="required">
+                            <input class="form-control" type="state" name="state" id="state" placeholder="state" required="required">
+                            <input class="form-control" type="zip" name="zipcode" id="zipcode" placeholder="zip" required="required">
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" type="button" data-bs-dismiss="modal" value="Close">
+                                <input class="btn btn-primary" type="submit" name='submit_button' value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <input type="submit" name='submit_button' value="Submit">
-        <br />
-        <input type="search" name="adopterSearch" placeholder="Search for adopter..">
-        <input type ="submit" name="submit_button" value="Search"><br />
-    </form>
-</div>
-<div>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>E-mail</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for r in rows %}
-        <tr>
-            <td>{{ r[0] }}</td>
-            <td>{{ r[1] }}</td>
-            <td>{{ r[2] }}</td>
-            <td>{{ r[7] }}</td>
-            <td>{{ r[8] }}</td>
-            <td>{{ r[3] }}</td>
-            <td>{{ r[4] }}</td>
-            <td>{{ r[5] }}</td>
-            <td>{{ r[6] }}</td>
-            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_adopter/{{r[0]}}'"> </td>
-            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_adopter/{{r[0]}}'"> </td>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>E-mail</th>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td>{{ r[0] }}</td>
+                    <td>{{ r[1] }}</td>
+                    <td>{{ r[2] }}</td>
+                    <td>{{ r[7] }}</td>
+                    <td>{{ r[8] }}</td>
+                    <td>{{ r[3] }}</td>
+                    <td>{{ r[4] }}</td>
+                    <td>{{ r[5] }}</td>
+                    <td>{{ r[6] }}</td>
+                    <td> <input class="btn btn-primary" type='button' name='Update' value='Update'
+                            onclick="window.location = '/update_adopter/{{r[0]}}'"> </td>
+                    <td> <input class="btn btn-primary" type='button' name='Delete' value='Delete'
+                            onclick="window.location = '/delete_adopter/{{r[0]}}'"> </td>
 
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-</div>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+</body>
+
 </html>
